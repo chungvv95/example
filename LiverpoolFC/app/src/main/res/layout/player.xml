@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:id="@+id/imagePlayer"
+        android:padding="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginStart="20dp" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/namePlayer"
+        android:layout_marginTop="10dp"
+        android:layout_toRightOf="@id/imagePlayer"
+        android:layout_toEndOf="@id/imagePlayer"
+        android:textColor="#ff00"
+        android:textSize="20sp"
+        android:text="@string/name"
+        android:gravity="center"
+        android:textAlignment="center"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/location"
+        android:layout_marginTop="10dp"
+        android:layout_below="@id/namePlayer"
+        android:layout_toRightOf="@id/imagePlayer"
+        android:layout_toEndOf="@id/imagePlayer"
+        android:text="@string/location"
+        android:textSize="15sp"
+        android:textColor="@color/colorPrimaryDark"
+
+        />
+
+    <ImageView
+        android:id="@+id/nation"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/namePlayer"
+        android:layout_marginEnd="20dp"
+        android:layout_marginRight="20dp"
+        android:padding="10dp" />
+</RelativeLayout>
