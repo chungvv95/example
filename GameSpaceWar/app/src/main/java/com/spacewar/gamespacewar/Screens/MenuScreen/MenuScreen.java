@@ -43,8 +43,6 @@ public class MenuScreen extends ScreenBase {
     public void Draw(Canvas canvas) {
         rect.set(0,0,getWidth(),getHeigh());
         canvas.drawBitmap(bmMenuBg, null,rect , null);
-        paint.setColor(Color.BLUE);
-        canvas.drawRect(rect, paint);
     }
 
     @Override
