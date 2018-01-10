@@ -18,6 +18,7 @@ import com.spacewar.gamespacewar.Screens.HighScoreScreen.HighScoreScreen;
 import com.spacewar.gamespacewar.Screens.LoadingScreen.LoadingScreen;
 import com.spacewar.gamespacewar.Screens.MenuScreen.MenuScreen;
 import com.spacewar.gamespacewar.Screens.OptionScreen.OptionScreen;
+import com.spacewar.gamespacewar.Screens.PlayGameScreen;
 import com.spacewar.gamespacewar.Screens.ScreenBase;
 import com.spacewar.gamespacewar.Stores.GameStatic;
 import com.spacewar.gamespacewar.Stores.GameUtils;
@@ -89,6 +90,9 @@ public abstract class BaseActivity extends Activity implements GameActivityInter
                     break;
                 case SCREEN_HIGHSCORE:
                     screen = new HighScoreScreen(this, GameScreen.SCREEN_TYPE.SCREEN_HIGHSCORE);
+                    break;
+                case SCREEN_PLAYGAME:
+                    screen = new PlayGameScreen(this, GameScreen.SCREEN_TYPE.SCREEN_PLAYGAME);
                     break;
                 default:
                     break;

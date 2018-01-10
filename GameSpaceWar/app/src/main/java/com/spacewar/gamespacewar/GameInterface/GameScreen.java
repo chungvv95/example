@@ -13,6 +13,7 @@ public interface GameScreen {
         SCEEN_MENU,
         SCREEN_OPTION,
         SCREEN_HIGHSCORE,
+        SCREEN_PLAYGAME,
 
         SCREEN_MAX,
     }
