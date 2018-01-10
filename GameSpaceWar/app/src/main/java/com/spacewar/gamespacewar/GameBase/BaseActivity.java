@@ -5,6 +5,7 @@ import android.content.pm.ActivityInfo;
 import android.graphics.Canvas;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.Window;
 import android.view.WindowManager;
 
@@ -114,12 +115,7 @@ public abstract class BaseActivity extends Activity implements GameActivityInter
         threadUpdate.resume();
     }
 
-    protected void logClass(String str) {
-        if(GameStatic.isLog) {
-            str += " [ " + GameUtils.getThreadSignature() + "]";
-            Log.d(this.getClass().getName(), str);
-        }
-    }
+
     public Input getInput() {
         return input;
     }
@@ -186,9 +182,15 @@ public abstract class BaseActivity extends Activity implements GameActivityInter
         return currentScreen;
     }
 
-
     public void goToScreen(GameScreen.SCREEN_TYPE type) {
         this.currentScreen = getScreen(type);
+    }
+
+    protected void logClass(String str) {
+        if(GameStatic.isLog) {
+            str += " [ " + GameUtils.getThreadSignature() + "]";
+            Log.d(this.getClass().getName(), str);
+        }
     }
 
 }

@@ -7,6 +7,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
 
+import com.spacewar.gamespacewar.GameBase.BaseActivity;
 import com.spacewar.gamespacewar.GameInterface.GameActivityInterface;
 import com.spacewar.gamespacewar.Screens.ScreenBase;
 import com.spacewar.gamespacewar.Stores.GameBitmap;
@@ -39,7 +40,7 @@ public class LoadingScreen extends ScreenBase {
     private  float progressing = 0;
 
 
-    public LoadingScreen(GameActivityInterface game, SCREEN_TYPE type) {
+    public LoadingScreen(BaseActivity game, SCREEN_TYPE type) {
         super(game, type);
         GameBitmap gb = GameBitmap.getInstance();
         gb.addImgFormFolder(loadingFolder);

@@ -11,7 +11,8 @@ import java.io.IOException;
  */
 
 public class GameStatic {
-    public static final boolean isLog = true;
+    public static final boolean isLog = false;
+    public static final boolean isLogInfo = true;
     public static Context context;
     public static AssetManager assets;
     public static float ratio_x_screen;

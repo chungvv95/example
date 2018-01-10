@@ -38,8 +38,13 @@ public abstract class Sprite implements GameObject {
     protected final int height;
     protected int x;
     protected int y;
+
+
     protected Rect recBody;
 
+    public Rect getRecBody() {
+        return recBody;
+    }
     public Sprite(Bitmap image, int rowCount, int colCount, int x, int y)  {
 
         this.image = image;
@@ -83,6 +88,8 @@ public abstract class Sprite implements GameObject {
     }
 
     public abstract void onCollision(Sprite other);
+
+
 
     protected Bitmap createSubImageAt(int row, int col)  {
         // createBitmap(bitmap, x, y, width, height).
