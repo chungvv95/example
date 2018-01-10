@@ -7,9 +7,12 @@ import android.graphics.Rect;
 
 import com.spacewar.gamespacewar.GameBase.BaseActivity;
 import com.spacewar.gamespacewar.GameInterface.GameActivityInterface;
+import com.spacewar.gamespacewar.GameInterface.Input;
 import com.spacewar.gamespacewar.Screens.ScreenBase;
 import com.spacewar.gamespacewar.Stores.GameBitmap;
 import com.spacewar.gamespacewar.Stores.GameStatic;
+
+import java.util.List;
 
 /**
  * Created by DELL on 1/10/2018.
@@ -51,6 +54,14 @@ public class OptionScreen extends ScreenBase {
 
     @Override
     public void Update(float deltaTime) {
+        List<Input.TouchEvent> touchEvents = game.getInput().getTouchEvents();
+        game.getInput().getKeyEvents();
+        int len = touchEvents.size();
+        for(int i = 0; i < len; i++) {
+            Input.TouchEvent event = touchEvents.get(i);
 
+
+
+        }
     }
 }

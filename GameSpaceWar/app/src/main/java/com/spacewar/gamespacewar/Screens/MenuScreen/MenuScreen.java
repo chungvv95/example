@@ -7,6 +7,7 @@ import android.graphics.Paint;
 import android.graphics.Point;
 import android.graphics.Rect;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.spacewar.gamespacewar.GameBase.BaseActivity;
 import com.spacewar.gamespacewar.GameInterface.GameActivityInterface;
@@ -49,6 +50,7 @@ public class MenuScreen extends ScreenBase {
         posBtnPlay.set((int)(460*ratioX), (int)(100*ratioY));
         posBtnScore.set(posBtnPlay.x, (int)(170*ratioY));
         posBtnOption.set(posBtnPlay.x, (int)(240*ratioY));
+        posBtnExit.set(posBtnPlay.x, (int) (310*ratioY));
     }
     private Bitmap getBitmap(String filename) {
         GameBitmap gb = GameBitmap.getInstance();
@@ -77,8 +79,12 @@ public class MenuScreen extends ScreenBase {
             if(event.type == Input.TouchEvent.TOUCH_UP){
                 if(inBounds(event, posBtnPlay.x,posBtnPlay.y, bmMenuPlay.getWidth(),bmMenuPlay.getHeight())) {
                     this.LogInfo("Play button clicked.");
+
                 } else if(inBounds(event,posBtnScore.x, posBtnScore.y, bmMenuTopScore.getWidth(), bmMenuTopScore.getHeight())) {
                     this.game.goToScreen(SCREEN_TYPE.SCREEN_HIGHSCORE);
+
+                } else if(inBounds(event,posBtnOption.x, posBtnOption.y, bmMenuOption.getWidth(),bmMenuOption.getHeight())){
+                    this.game.goToScreen(SCREEN_TYPE.SCREEN_OPTION);
                 }
 
 

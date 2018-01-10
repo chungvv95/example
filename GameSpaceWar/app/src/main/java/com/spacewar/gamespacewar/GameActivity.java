@@ -9,7 +9,7 @@ public class GameActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        goToScreen(GameScreen.SCREEN_TYPE.SCEEN_MENU);
+        goToScreen(GameScreen.SCREEN_TYPE.SCREEN_LOADING);
     }
 
     @Override
