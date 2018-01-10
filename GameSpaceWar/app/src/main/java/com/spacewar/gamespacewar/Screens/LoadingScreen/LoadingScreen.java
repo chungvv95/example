@@ -12,6 +12,7 @@ import com.spacewar.gamespacewar.GameInterface.GameActivityInterface;
 import com.spacewar.gamespacewar.Screens.ScreenBase;
 import com.spacewar.gamespacewar.Stores.GameBitmap;
 import com.spacewar.gamespacewar.Stores.GameStatic;
+import com.spacewar.gamespacewar.Stores.Settings;
 
 /**
  * Created by acer on 09/01/2018.
@@ -84,6 +85,7 @@ public class LoadingScreen extends ScreenBase {
         } else if(initPlayGameScreen == false) {
             initPlayGameScreen = true;
             proLenght += max / 8;
+            Settings.load(game.getFileIO());
         }
 
         if(initPlayGameScreen &&

@@ -1,15 +1,19 @@
 package com.spacewar.gamespacewar.GameBase;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.pm.ActivityInfo;
 import android.graphics.Canvas;
 import android.os.Bundle;
+import android.os.PowerManager;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.Window;
 import android.view.WindowManager;
 
 import com.spacewar.gamespacewar.GameInput.GameInput;
+import com.spacewar.gamespacewar.GameInterface.Audio;
+import com.spacewar.gamespacewar.GameInterface.FileIO;
 import com.spacewar.gamespacewar.GameInterface.GameActivityInterface;
 import com.spacewar.gamespacewar.GameInterface.GameObject;
 import com.spacewar.gamespacewar.GameInterface.GameScreen;
@@ -35,10 +39,12 @@ public abstract class BaseActivity extends Activity implements GameActivityInter
     protected ThreadDraw threadDraw;
     protected List<GameObject> listObj = new ArrayList<>();
     protected Input input;
+    protected FileIO fileIO;
+    protected Audio audio;
     protected int screenWidth;
     protected int screenHeigh;
     protected ACTIVITY_TYPE type = NONE_ACTIVITY;
-
+    PowerManager.WakeLock wakeLock;
     protected ScreenBase currentScreen = null;
     protected Map<GameScreen.SCREEN_TYPE, ScreenBase> MapScreen = new HashMap<>();
     @Override
@@ -68,8 +74,12 @@ public abstract class BaseActivity extends Activity implements GameActivityInter
         logClass("==> Create Start");
         threadDraw = new ThreadDraw(this);
         threadUpdate = new ThreadUpdate(this);
-        input = (Input) new GameInput(this, threadDraw, scaleX, scaleY);
+        fileIO = new AndroidFileIO(this);
+        audio = new AndroidAudio(this);
+        input = (Input) new GameInput(this, threadDraw, 1, 1);
         setContentView(threadDraw);
+        PowerManager powerManager = (PowerManager) getSystemService(Context.POWER_SERVICE);
+        wakeLock = powerManager.newWakeLock(PowerManager.FULL_WAKE_LOCK, "GLGame");
         logClass("==> Create End");
     }
 
@@ -107,6 +117,7 @@ public abstract class BaseActivity extends Activity implements GameActivityInter
     @Override
     protected void onPause() {
         super.onPause();
+        wakeLock.release();
         threadDraw.onPause();
         threadUpdate.stop();
     }
@@ -115,13 +126,25 @@ public abstract class BaseActivity extends Activity implements GameActivityInter
     @Override
     protected void onResume() {
         super.onResume();
+        wakeLock.acquire();
         threadDraw.resume();
         threadUpdate.resume();
+
+//        if (isFinishing())
+//            screen.dispose();
     }
 
 
     public Input getInput() {
         return input;
+    }
+
+    public FileIO getFileIO() {
+        return fileIO;
+    }
+
+    public Audio getAudio() {
+        return audio;
     }
 
     @Override

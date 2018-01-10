@@ -73,7 +73,7 @@ public class MenuScreen extends ScreenBase {
         int len = touchEvents.size();
         for(int i = 0; i < len; i++) {
             Input.TouchEvent event = touchEvents.get(i);
-
+            this.LogInfo("log " + event.x + " i = " + i);
             if(event.type == Input.TouchEvent.TOUCH_UP){
                 if(inBounds(event, posBtnPlay.x,posBtnPlay.y, bmMenuPlay.getWidth(),bmMenuPlay.getHeight())) {
                     this.LogInfo("Play button clicked.");

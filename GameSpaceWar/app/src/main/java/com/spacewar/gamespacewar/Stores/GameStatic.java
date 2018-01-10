@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.res.AssetManager;
 import android.graphics.Point;
 
+import com.spacewar.gamespacewar.GameInterface.Sound;
+
 import java.io.IOException;
 
 /**
@@ -18,6 +20,10 @@ public class GameStatic {
     public static float ratio_x_screen;
     public static float ratio_y_screen;
     public static Point ScreenSize = new Point();
+
+    public static Sound click;
+    public static Sound eat;
+    public static Sound bitten;
 
     public static String[] listAssetFiles(String path) {
         String [] list;

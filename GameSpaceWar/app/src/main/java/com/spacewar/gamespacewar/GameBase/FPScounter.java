@@ -34,7 +34,7 @@ final public class FPScounter {
         if(frameTimes >= 1000)
         {
             //post results at the console
-            Log.i("FPS", Long.toString(frames));
+//            Log.i("FPS", Long.toString(frames));
             //reset time differences and number of counted frames
             frames = 0;
             frameTimes = 0;
