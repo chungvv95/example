@@ -69,7 +69,9 @@ public class GameBitmap {
     public void createBitmap(String fileName, PixmapFormat format) {
         if(!mapBitmap.containsKey(fileName)) {
             Bitmap bm = getBitmap(fileName, format);
-            mapBitmap.put(fileName, bm);
+            String key = fileName.substring(fileName.lastIndexOf("/") + 1);
+
+            mapBitmap.put(key, bm);
         }
     }
 
@@ -77,8 +79,13 @@ public class GameBitmap {
         if(mapBitmap.containsKey(fileName))
             return mapBitmap.get(fileName);
         else {
-            createBitmap(fileName, PixmapFormat.ARGB8888);
-            return mapBitmap.get(fileName);
+            String key = fileName.substring(fileName.lastIndexOf("/") + 1);
+            if(mapBitmap.containsKey(key)){
+                return mapBitmap.get(key);
+            }else {
+                createBitmap(fileName, PixmapFormat.ARGB8888);
+                return mapBitmap.get(fileName);
+            }
         }
     }
 
@@ -90,5 +97,8 @@ public class GameBitmap {
                 createBitmap(str, PixmapFormat.ARGB4444);
             }
         }
+    }
+    public int autoCreateBitMapInAssetFolder(){
+        return 0;
     }
 }
