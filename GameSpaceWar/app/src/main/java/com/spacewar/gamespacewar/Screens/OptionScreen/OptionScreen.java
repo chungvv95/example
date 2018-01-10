@@ -5,6 +5,7 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
 
+import com.spacewar.gamespacewar.GameBase.BaseActivity;
 import com.spacewar.gamespacewar.GameInterface.GameActivityInterface;
 import com.spacewar.gamespacewar.Screens.ScreenBase;
 import com.spacewar.gamespacewar.Stores.GameBitmap;
@@ -26,7 +27,7 @@ public class OptionScreen extends ScreenBase {
 
     private Rect rect = new Rect();
     private Paint paint = new Paint();
-    public OptionScreen(GameActivityInterface game, SCREEN_TYPE type) {
+    public OptionScreen(BaseActivity game, SCREEN_TYPE type) {
         super(game, type);
         GameBitmap gb = GameBitmap.getInstance();
         gb.addImgFormFolder(optionFolder);

@@ -5,6 +5,7 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
 
+import com.spacewar.gamespacewar.GameBase.BaseActivity;
 import com.spacewar.gamespacewar.GameInterface.GameActivityInterface;
 import com.spacewar.gamespacewar.Screens.ScreenBase;
 import com.spacewar.gamespacewar.Stores.GameBitmap;
@@ -21,7 +22,7 @@ public class HighScoreScreen extends ScreenBase{
     private Paint paint = new Paint();
 
 
-    public HighScoreScreen(GameActivityInterface game, SCREEN_TYPE type) {
+    public HighScoreScreen(BaseActivity game, SCREEN_TYPE type) {
         super(game, type);
 
         GameBitmap gb = GameBitmap.getInstance();

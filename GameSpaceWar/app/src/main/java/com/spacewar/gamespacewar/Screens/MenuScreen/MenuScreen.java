@@ -4,6 +4,7 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Point;
 import android.graphics.Rect;
 import android.util.Log;
 
@@ -31,6 +32,8 @@ public class MenuScreen extends ScreenBase {
     private Rect rect = new Rect();
     private Paint paint = new Paint();
 
+    private Point posBtnPlay = new Point();
+
 
     public MenuScreen(BaseActivity game, SCREEN_TYPE type) {
         super(game, type);
@@ -39,6 +42,9 @@ public class MenuScreen extends ScreenBase {
         bmMenuExit = this.getBitmap("exit.png");
         bmMenuOption = this.getBitmap("option.png");
         bmMenuTopScore = this.getBitmap("top_scrore.png");
+        float ratioX = GameStatic.ratio_x_screen;
+        float ratioY = GameStatic.ratio_y_screen;
+        posBtnPlay.set(460*(int)ratioX, 100*(int)ratioY);
     }
     private Bitmap getBitmap(String filename) {
         GameBitmap gb = GameBitmap.getInstance();
@@ -49,7 +55,7 @@ public class MenuScreen extends ScreenBase {
     public void Draw(Canvas canvas) {
         rect.set(0,0,getWidth(),getHeigh());
         canvas.drawBitmap(bmMenuBg, null,rect , null);
-        canvas.drawBitmap(bmMenuPlay, 460* GameStatic.ratio_x_screen, 100* GameStatic.ratio_y_screen, null);
+        canvas.drawBitmap(bmMenuPlay, posBtnPlay.x, posBtnPlay.y, null);
         canvas.drawBitmap(bmMenuTopScore,460* GameStatic.ratio_x_screen,170* GameStatic.ratio_y_screen,null);
         canvas.drawBitmap(bmMenuOption, 460*GameStatic.ratio_x_screen, 240* GameStatic.ratio_y_screen,null);
         canvas.drawBitmap(bmMenuExit, 460 *GameStatic.ratio_x_screen, 310* GameStatic.ratio_y_screen, null);
@@ -65,9 +71,13 @@ public class MenuScreen extends ScreenBase {
             Input.TouchEvent event = touchEvents.get(i);
 
             if(event.type == Input.TouchEvent.TOUCH_UP){
+                if(inBounds(event, posBtnPlay.x,posBtnPlay.y, bmMenuPlay.getWidth(),bmMenuPlay.getHeight())) {
+                    this.LogInfo("Play button clicked.");
+                }
                 this.LogInfo("Touch Up");
             }else if(event.type == Input.TouchEvent.TOUCH_DOWN){
                 this.LogInfo("Touch Down");
+
             }
 
         }
