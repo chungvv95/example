@@ -5,10 +5,15 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
+import android.util.Log;
 
+import com.spacewar.gamespacewar.GameBase.BaseActivity;
 import com.spacewar.gamespacewar.GameInterface.GameActivityInterface;
+import com.spacewar.gamespacewar.GameInterface.Input;
 import com.spacewar.gamespacewar.Screens.ScreenBase;
 import com.spacewar.gamespacewar.Stores.GameBitmap;
+
+import java.util.List;
 
 /**
  * Created by acer on 09/01/2018.
@@ -26,7 +31,7 @@ public class MenuScreen extends ScreenBase {
     private Paint paint = new Paint();
 
 
-    public MenuScreen(GameActivityInterface game, SCREEN_TYPE type) {
+    public MenuScreen(BaseActivity game, SCREEN_TYPE type) {
         super(game, type);
         bmMenuBg = this.getBitmap("menu_bg.png");
         bmMenuPlay = this.getBitmap("play.png");
@@ -47,6 +52,18 @@ public class MenuScreen extends ScreenBase {
 
     @Override
     public void Update(float deltaTime) {
+        List<Input.TouchEvent> touchEvents = game.getInput().getTouchEvents();
+        game.getInput().getKeyEvents();
+        int len = touchEvents.size();
+        for(int i = 0; i < len; i++) {
+            Input.TouchEvent event = touchEvents.get(i);
 
+            if(event.type == Input.TouchEvent.TOUCH_UP){
+                this.LogInfo("Touch Up");
+            }else if(event.type == Input.TouchEvent.TOUCH_DOWN){
+                this.LogInfo("Touch Down");
+            }
+
+        }
     }
 }
