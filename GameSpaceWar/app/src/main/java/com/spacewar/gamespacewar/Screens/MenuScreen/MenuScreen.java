@@ -33,7 +33,9 @@ public class MenuScreen extends ScreenBase {
     private Paint paint = new Paint();
 
     private Point posBtnPlay = new Point();
-
+    private Point posBtnScore = new Point();
+    private Point posBtnExit = new Point();
+    private Point posBtnOption = new Point();
 
     public MenuScreen(BaseActivity game, SCREEN_TYPE type) {
         super(game, type);
@@ -44,7 +46,9 @@ public class MenuScreen extends ScreenBase {
         bmMenuTopScore = this.getBitmap("top_scrore.png");
         float ratioX = GameStatic.ratio_x_screen;
         float ratioY = GameStatic.ratio_y_screen;
-        posBtnPlay.set(460*(int)ratioX, 100*(int)ratioY);
+        posBtnPlay.set((int)(460*ratioX), (int)(100*ratioY));
+        posBtnScore.set(posBtnPlay.x, (int)(170*ratioY));
+        posBtnOption.set(posBtnPlay.x, (int)(240*ratioY));
     }
     private Bitmap getBitmap(String filename) {
         GameBitmap gb = GameBitmap.getInstance();
@@ -56,9 +60,9 @@ public class MenuScreen extends ScreenBase {
         rect.set(0,0,getWidth(),getHeigh());
         canvas.drawBitmap(bmMenuBg, null,rect , null);
         canvas.drawBitmap(bmMenuPlay, posBtnPlay.x, posBtnPlay.y, null);
-        canvas.drawBitmap(bmMenuTopScore,460* GameStatic.ratio_x_screen,170* GameStatic.ratio_y_screen,null);
-        canvas.drawBitmap(bmMenuOption, 460*GameStatic.ratio_x_screen, 240* GameStatic.ratio_y_screen,null);
-        canvas.drawBitmap(bmMenuExit, 460 *GameStatic.ratio_x_screen, 310* GameStatic.ratio_y_screen, null);
+        canvas.drawBitmap(bmMenuTopScore,posBtnScore.x,posBtnScore.y,null);
+        canvas.drawBitmap(bmMenuOption, posBtnOption.x, posBtnOption.y,null);
+        canvas.drawBitmap(bmMenuExit, posBtnExit.x, posBtnExit.y, null);
 
     }
 
@@ -73,7 +77,13 @@ public class MenuScreen extends ScreenBase {
             if(event.type == Input.TouchEvent.TOUCH_UP){
                 if(inBounds(event, posBtnPlay.x,posBtnPlay.y, bmMenuPlay.getWidth(),bmMenuPlay.getHeight())) {
                     this.LogInfo("Play button clicked.");
+                } else if(inBounds(event,posBtnScore.x, posBtnScore.y, bmMenuTopScore.getWidth(), bmMenuTopScore.getHeight())) {
+                    this.game.goToScreen(SCREEN_TYPE.SCREEN_HIGHSCORE);
                 }
+
+
+
+
                 this.LogInfo("Touch Up");
             }else if(event.type == Input.TouchEvent.TOUCH_DOWN){
                 this.LogInfo("Touch Down");
