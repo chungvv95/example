@@ -11,6 +11,8 @@ public interface GameScreen {
         SCREEN_NONE,
         SCREEN_LOADING,
         SCEEN_MENU,
+        SCREEN_OPTION,
+        SCREEN_HIGHSCORE,
 
         SCREEN_MAX,
     }

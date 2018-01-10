@@ -9,6 +9,7 @@ import android.graphics.Rect;
 import com.spacewar.gamespacewar.GameInterface.GameActivityInterface;
 import com.spacewar.gamespacewar.Screens.ScreenBase;
 import com.spacewar.gamespacewar.Stores.GameBitmap;
+import com.spacewar.gamespacewar.Stores.GameStatic;
 
 /**
  * Created by acer on 09/01/2018.
@@ -16,7 +17,7 @@ import com.spacewar.gamespacewar.Stores.GameBitmap;
 
 public class MenuScreen extends ScreenBase {
 
-    private final String menuFolder = "menu/";
+    private static final String menuFolder = "menu/";
     private Bitmap bmMenuBg;
     private Bitmap bmMenuPlay;
     private Bitmap bmMenuOption;
@@ -43,6 +44,11 @@ public class MenuScreen extends ScreenBase {
     public void Draw(Canvas canvas) {
         rect.set(0,0,getWidth(),getHeigh());
         canvas.drawBitmap(bmMenuBg, null,rect , null);
+        canvas.drawBitmap(bmMenuPlay, 460* GameStatic.ratio_x_screen, 100* GameStatic.ratio_y_screen, null);
+        canvas.drawBitmap(bmMenuTopScore,460* GameStatic.ratio_x_screen,170* GameStatic.ratio_y_screen,null);
+        canvas.drawBitmap(bmMenuOption, 460*GameStatic.ratio_x_screen, 240* GameStatic.ratio_y_screen,null);
+        canvas.drawBitmap(bmMenuExit, 460 *GameStatic.ratio_x_screen, 310* GameStatic.ratio_y_screen, null);
+
     }
 
     @Override
