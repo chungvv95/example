@@ -17,9 +17,16 @@ import com.spacewar.gamespacewar.Stores.GameUtils;
 public abstract class ScreenBase implements GameScreen {
     protected BaseActivity game;
     protected SCREEN_TYPE type;
+    protected boolean isFocus = false;
+    protected GameState gameState = GameState.GameOver;
     public ScreenBase(BaseActivity game, SCREEN_TYPE type) {
         this.game = game;
         this.type = type;
+    }
+
+    @Override
+    public GameState getGameState() {
+        return gameState;
     }
 
     @Override

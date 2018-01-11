@@ -105,6 +105,22 @@ public class LoadingScreen extends ScreenBase {
             this.game.goToScreen(SCREEN_TYPE.SCEEN_MENU);
         }
     }
+
+    @Override
+    public void pause() {
+
+    }
+
+    @Override
+    public void resume() {
+
+    }
+
+    @Override
+    public void dispose() {
+
+    }
+
     private void addMenuFolder(){
         GameBitmap.getInstance().addImgFormFolder("menu");
     }

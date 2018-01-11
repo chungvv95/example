@@ -17,6 +17,15 @@ public interface GameScreen {
 
         SCREEN_MAX,
     }
+    public enum GameState {
+        Ready,
+        Running,
+        Paused,
+        GameOver
+    }
+
+
+    public GameState getGameState();
     public int getWidth();
     public int getHeigh();
     public SCREEN_TYPE getScreenID();
@@ -24,4 +33,7 @@ public interface GameScreen {
 
     public void Draw(Canvas canvas);
     public void Update(float deltaTime);
+    public abstract void pause();
+    public abstract void resume();
+    public abstract void dispose();
 }

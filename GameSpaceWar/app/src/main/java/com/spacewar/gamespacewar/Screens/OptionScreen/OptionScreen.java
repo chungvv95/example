@@ -64,4 +64,19 @@ public class OptionScreen extends ScreenBase {
 
         }
     }
+
+    @Override
+    public void pause() {
+
+    }
+
+    @Override
+    public void resume() {
+
+    }
+
+    @Override
+    public void dispose() {
+
+    }
 }

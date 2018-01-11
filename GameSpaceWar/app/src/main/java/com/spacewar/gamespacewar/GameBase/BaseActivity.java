@@ -4,12 +4,18 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.pm.ActivityInfo;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.PowerManager;
 import android.util.Log;
 import android.view.MotionEvent;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.EditText;
+import android.widget.FrameLayout;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.spacewar.gamespacewar.GameInput.GameInput;
 import com.spacewar.gamespacewar.GameInterface.Audio;
@@ -22,7 +28,7 @@ import com.spacewar.gamespacewar.Screens.HighScoreScreen.HighScoreScreen;
 import com.spacewar.gamespacewar.Screens.LoadingScreen.LoadingScreen;
 import com.spacewar.gamespacewar.Screens.MenuScreen.MenuScreen;
 import com.spacewar.gamespacewar.Screens.OptionScreen.OptionScreen;
-import com.spacewar.gamespacewar.Screens.PlayGameScreen;
+import com.spacewar.gamespacewar.Screens.PlayGameScreen.PlayGameScreen;
 import com.spacewar.gamespacewar.Screens.ScreenBase;
 import com.spacewar.gamespacewar.Stores.GameStatic;
 import com.spacewar.gamespacewar.Stores.GameUtils;
@@ -72,12 +78,36 @@ public abstract class BaseActivity extends Activity implements GameActivityInter
 
         // should add list in here.
         logClass("==> Create Start");
+
+        FrameLayout gameLayout = new FrameLayout(this);
+        LinearLayout gameWidgets = new LinearLayout(this);
+
+        TextView tx = new TextView(this);
+        tx.setText("Here you are.!!!!");
+        tx.setTextColor(Color.RED);
+
+        EditText et = new EditText(this);
+        et.setX(100);
+        et.setY(100);
+        et.setWidth(200);
+
+
         threadDraw = new ThreadDraw(this);
         threadUpdate = new ThreadUpdate(this);
         fileIO = new AndroidFileIO(this);
         audio = new AndroidAudio(this);
         input = (Input) new GameInput(this, threadDraw, 1, 1);
-        setContentView(threadDraw);
+
+
+        gameWidgets.addView(tx);
+        gameLayout.addView(threadDraw);
+        gameLayout.addView(gameWidgets);
+
+//        gameWidgets.removeView(tx);
+        gameWidgets.addView(et);
+//        gameLayout.addView(gameWidgets);
+
+        setContentView(gameLayout);
         PowerManager powerManager = (PowerManager) getSystemService(Context.POWER_SERVICE);
         wakeLock = powerManager.newWakeLock(PowerManager.FULL_WAKE_LOCK, "GLGame");
         logClass("==> Create End");
@@ -118,6 +148,7 @@ public abstract class BaseActivity extends Activity implements GameActivityInter
     protected void onPause() {
         super.onPause();
         wakeLock.release();
+        this.getCurrentScreen().pause();
         threadDraw.onPause();
         threadUpdate.stop();
     }
@@ -127,6 +158,7 @@ public abstract class BaseActivity extends Activity implements GameActivityInter
     protected void onResume() {
         super.onResume();
         wakeLock.acquire();
+        this.getCurrentScreen().resume();
         threadDraw.resume();
         threadUpdate.resume();
 
@@ -210,7 +242,19 @@ public abstract class BaseActivity extends Activity implements GameActivityInter
     }
 
     public void goToScreen(GameScreen.SCREEN_TYPE type) {
-        this.currentScreen = getScreen(type);
+        ScreenBase screen = getScreen(type);
+
+        if(screen == null)
+            throw new IllegalArgumentException("Screen must not be null");
+
+        if(this.currentScreen != null) {
+            this.currentScreen.pause();
+            this.currentScreen.dispose();
+        }
+
+        screen.resume();
+        screen.Update(0);
+        this.currentScreen = screen;
     }
 
     protected void logClass(String str) {

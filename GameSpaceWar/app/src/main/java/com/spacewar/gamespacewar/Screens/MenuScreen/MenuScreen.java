@@ -7,11 +7,13 @@ import android.graphics.Paint;
 import android.graphics.Point;
 import android.graphics.Rect;
 import android.util.Log;
+import android.view.View;
 import android.widget.Toast;
 
 import com.spacewar.gamespacewar.GameBase.BaseActivity;
 import com.spacewar.gamespacewar.GameInterface.GameActivityInterface;
 import com.spacewar.gamespacewar.GameInterface.Input;
+import com.spacewar.gamespacewar.R;
 import com.spacewar.gamespacewar.Screens.ScreenBase;
 import com.spacewar.gamespacewar.Stores.GameBitmap;
 import com.spacewar.gamespacewar.Stores.GameStatic;
@@ -38,6 +40,7 @@ public class MenuScreen extends ScreenBase {
     private Point posBtnExit = new Point();
     private Point posBtnOption = new Point();
 
+
     public MenuScreen(BaseActivity game, SCREEN_TYPE type) {
         super(game, type);
         bmMenuBg = this.getBitmap("menu_bg.png");
@@ -51,6 +54,8 @@ public class MenuScreen extends ScreenBase {
         posBtnScore.set(posBtnPlay.x, (int)(170*ratioY));
         posBtnOption.set(posBtnPlay.x, (int)(240*ratioY));
         posBtnExit.set(posBtnPlay.x, (int) (310*ratioY));
+
+
     }
     private Bitmap getBitmap(String filename) {
         GameBitmap gb = GameBitmap.getInstance();
@@ -59,6 +64,8 @@ public class MenuScreen extends ScreenBase {
 
     @Override
     public void Draw(Canvas canvas) {
+        if(this.isFocus == false)
+            return;
         rect.set(0,0,getWidth(),getHeigh());
         canvas.drawBitmap(bmMenuBg, null,rect , null);
         canvas.drawBitmap(bmMenuPlay, posBtnPlay.x, posBtnPlay.y, null);
@@ -79,7 +86,7 @@ public class MenuScreen extends ScreenBase {
             if(event.type == Input.TouchEvent.TOUCH_UP){
                 if(inBounds(event, posBtnPlay.x,posBtnPlay.y, bmMenuPlay.getWidth(),bmMenuPlay.getHeight())) {
                     this.LogInfo("Play button clicked.");
-
+                    this.game.goToScreen(SCREEN_TYPE.SCREEN_PLAYGAME);
                 } else if(inBounds(event,posBtnScore.x, posBtnScore.y, bmMenuTopScore.getWidth(), bmMenuTopScore.getHeight())) {
                     this.game.goToScreen(SCREEN_TYPE.SCREEN_HIGHSCORE);
 
@@ -97,5 +104,20 @@ public class MenuScreen extends ScreenBase {
             }
 
         }
+    }
+
+    @Override
+    public void pause() {
+
+    }
+
+    @Override
+    public void resume() {
+        this.isFocus = true;
+    }
+
+    @Override
+    public void dispose() {
+        this.isFocus = false;
     }
 }

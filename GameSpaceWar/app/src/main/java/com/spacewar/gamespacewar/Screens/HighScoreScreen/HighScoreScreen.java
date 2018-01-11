@@ -41,4 +41,19 @@ public class HighScoreScreen extends ScreenBase{
     public void Update(float deltaTime) {
 
     }
+
+    @Override
+    public void pause() {
+
+    }
+
+    @Override
+    public void resume() {
+
+    }
+
+    @Override
+    public void dispose() {
+
+    }
 }
