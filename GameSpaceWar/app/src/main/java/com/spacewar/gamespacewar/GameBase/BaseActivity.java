@@ -8,6 +8,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.os.PowerManager;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
@@ -16,6 +17,7 @@ import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.spacewar.gamespacewar.GameInput.GameInput;
 import com.spacewar.gamespacewar.GameInterface.Audio;
@@ -24,6 +26,7 @@ import com.spacewar.gamespacewar.GameInterface.GameActivityInterface;
 import com.spacewar.gamespacewar.GameInterface.GameObject;
 import com.spacewar.gamespacewar.GameInterface.GameScreen;
 import com.spacewar.gamespacewar.GameInterface.Input;
+import com.spacewar.gamespacewar.R;
 import com.spacewar.gamespacewar.Screens.HighScoreScreen.HighScoreScreen;
 import com.spacewar.gamespacewar.Screens.LoadingScreen.LoadingScreen;
 import com.spacewar.gamespacewar.Screens.MenuScreen.MenuScreen;
@@ -91,6 +94,9 @@ public abstract class BaseActivity extends Activity implements GameActivityInter
         et.setY(100);
         et.setWidth(200);
 
+        LayoutInflater mInflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
+        View v = mInflater.inflate(R.layout.game_layout,gameLayout, false);
 
         threadDraw = new ThreadDraw(this);
         threadUpdate = new ThreadUpdate(this);
@@ -102,10 +108,12 @@ public abstract class BaseActivity extends Activity implements GameActivityInter
         gameWidgets.addView(tx);
         gameLayout.addView(threadDraw);
         gameLayout.addView(gameWidgets);
-
+        gameLayout.addView(v);
 //        gameWidgets.removeView(tx);
         gameWidgets.addView(et);
 //        gameLayout.addView(gameWidgets);
+
+
 
         setContentView(gameLayout);
         PowerManager powerManager = (PowerManager) getSystemService(Context.POWER_SERVICE);
@@ -264,4 +272,7 @@ public abstract class BaseActivity extends Activity implements GameActivityInter
         }
     }
 
+    public void onXMLCallback(View view) {
+        Toast.makeText(this, "here you are.", Toast.LENGTH_LONG).show();
+    }
 }
